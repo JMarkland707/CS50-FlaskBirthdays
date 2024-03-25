@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+
+<html lang="en">
+    <head>
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap" rel="stylesheet">
+        <link href="/static/styles.css" rel="stylesheet">
+        <title>Birthdays</title>
+    </head>
+    <body>
+        <div class="header">
+            <h1>Birthdays</h1>
+        </div>
+        <div class="container">
+            <div class="section">
+
+                <h2>Add a Birthday</h2>
+                <!-- TODO: Create a form for users to submit a name, a month, and a day -->
+            <form action="/" method="POST">
+                    <input autocomplete="off" autofocus name="name" placeholder="Name" required type="text">
+                    <input name="month" placeholder="Month" required type="month" min="1" max="12">
+                    <input name="day" placeholder="Day" required type="day" min="1" max="31">
+                    <input name="year" placeholder="Year" required type="year" min="1900" max="2024">
+                    <input type="Submit" value="Add Birthday">
+               <!-- HTML below will create a drop down box
+                    <select name="month">
+                    <option selected disabled>Month</option>
+                    {% for month in MONTHS %}
+                        <option value="{{ month }}">{{ month }}</option>
+                    {% endfor %}
+                </select>
+                <select name="days">
+                    <option selected disabled>Day</option>
+                    {% for day in DAYS %}
+                        <option value="{{ day }}">{{ day }}</option>
+                    {% endfor %}
+                </select> -->
+            </form>
+
+            </div>
+
+            <div class="section">
+
+                <h2>All Birthdays</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Birthday</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- TODO: Loop through the database entries to display them in this table -->
+                        {% for birthday in birthdays %}
+                        <tr>
+                            <td>{{ birthday.name }}</td>
+                            <td>{{ birthday.month }}/{{ birthday.day}}/{{birthday.year}}</td>
+                            <td>
+                                <form action="/deregister" method="POST">
+                                    <input name="id" type="hidden" value="{{birthday.id}}">
+                                    <button type="submit">Deregister</button>
+                                </form>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </body>
+</html>
